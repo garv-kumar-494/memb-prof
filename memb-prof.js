@@ -7,9 +7,8 @@ app.use(cors());
 app.use(express.json());
 
 // 🔥 MongoDB Atlas direct connection (NO ENV)
-mongoose.connect(
-  "mongodb+srv://GarvKumar:GarvKumarServer@cluster0.ptxxm7y.mongodb.net/memberDB"
-)
+mongoose.connect(process.env.MONGO_URI)
+  
   .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.log(err));
 
@@ -51,7 +50,9 @@ app.post("/signup", async (req, res) => {
 });
 
 
-// Server
-app.listen(5000, () => {
-  console.log("🚀 Server running on http://localhost:5000");
-});  
+
+// ================= Render PORT =================
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("🚀 Server running on port", PORT);
+});
